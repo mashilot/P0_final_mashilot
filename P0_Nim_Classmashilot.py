@@ -38,18 +38,22 @@ class Nim():
         self.turn = "p"
         self.ask_user_for_eggs()
         self.create_eggs()
-        self.end_turn = turtle.Turtle()
-        #self.button_image = "button_end.gif"
-        #self.wn.register_shape(self.button_image)
-        #self.end_turn.shape(self.button_image)
+        self.end_turn_turt = turtle.Turtle()
+        self.button_image = "button_end.gif"
+        self.wn.register_shape(self.button_image)
+        self.end_turn_turt.shape(self.button_image)
+        self.end_turn_turt.onclick(self.end_player_turn)
 
         self.wn.listen()
         self.wn.mainloop()
 
-   # def end_turn(self):
-
-      #  self.end_turn.penup()
-       # self.end_turn.setpos(-300, 250)
+    def end_player_turn(self, x,  y):
+        global number_of_clicks
+        if number_of_clicks > 0:
+            print(number_of_clicks)
+            self.computers_turn()
+        # self.end_turn.penup()
+        # self.end_turn.setpos(-300, 250)
 
 
         #self.end_turn.onclick(self.computers_turn)
@@ -123,7 +127,6 @@ class Nim():
         :param: will show the game on this screen
         :return: none """
 
-
         self.wn.setup(800,700)              # Determine the window size
         self.wn.title("Game of Nim")        # Change the window title
         self.wn.bgcolor("red")              # Set the background color
@@ -175,32 +178,35 @@ class Egg:
         if not self.did_click:
             self.did_click = True
             global number_of_clicks
+
+            number_of_clicks += 1
+            self.nim.eggs -= 1
+            if number_of_clicks == 4:
+                self.nim.computers_turn()
             self.eggy.setheading(90)
             self.eggy.forward(300)
             self.eggy.left(90)
             self.eggy.forward(280)
             self.eggy.left(90)
             self.eggy.forward(450)
-            number_of_clicks += 1
-            self.nim.eggs -= 1
-            a_t = input('Are you done?')
-            if number_of_clicks >= 4:
-                self.nim.end_turn.onclick("button_end.gif")
-                print(a_t)
-                self.nim.computers_turn()
-            elif number_of_clicks >= 3:
-                self.nim.end_turn.onclick("button_end.gif")
-                self.nim.computers_turn()
-            elif number_of_clicks >= 2:
-                self.nim.end_turn.onclick("button_end.gif")
-                self.nim.computers_turn()
-            elif number_of_clicks >= 1:
-                self.nim.end_turn.onclick("button_end.gif")
-                print(a_t)
-                if a_t == 'yes':
-                    self.nim.computers_turn()
-                else:
-                    self.egg_motion(x, y)
+            # a_t = input('Are you done?')
+            # if number_of_clicks >= 4:
+            #     # self.nim.end_turn_turt.onclick("button_end.gif")
+            #     # print(a_t)
+            #     self.nim.computers_turn()
+            # elif number_of_clicks >= 3:
+            #     # self.nim.end_turn.onclick("button_end.gif")
+            #     self.nim.computers_turn()
+            # elif number_of_clicks >= 2:
+            #     # self.nim.end_turn.onclick("button_end.gif")
+            #     self.nim.computers_turn()
+            # elif number_of_clicks >= 1:
+            #     # self.nim.end_turn.onclick("button_end.gif")
+            #     # print(a_t)
+            #     # if a_t == 'yes':
+            #     self.nim.computers_turn()
+            #     # else:
+            #     #     self.egg_motion(x, y)
     def egg_motion_right(self):
         """ This method will move the computer's eggs to the right
 
