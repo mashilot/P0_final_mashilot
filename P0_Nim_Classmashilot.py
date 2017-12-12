@@ -11,15 +11,16 @@
 # Original Author: Dr. Jan Pearce
 #Dr. Scott Heggen
 # Alex Guis
-#
+#Will TA
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
-import time
 import turtle
 global number_of_clicks
 import random
 import sys
+
+#This is code for game of Nim and uses a Nim class and a Egg class in order to play the game
 class Nim():
 
     def __init__(self):
@@ -43,7 +44,11 @@ class Nim():
         self.wn.register_shape(self.button_image)
         self.end_turn_turt.shape(self.button_image)
         self.end_turn_turt.onclick(self.end_player_turn)
+        #self.end_turn_turt. (x=200, y=200)
 
+       # self.sys.pos(200, 200)
+
+         # Be last
         self.wn.listen()
         self.wn.mainloop()
 
@@ -52,32 +57,14 @@ class Nim():
         if number_of_clicks > 0:
             print(number_of_clicks)
             self.computers_turn()
-        # self.end_turn.penup()
-        # self.end_turn.setpos(-300, 250)
 
 
-        #self.end_turn.onclick(self.computers_turn)
-
-        # Be last
 
 
     def computers_turn(self):
         print("Computer's turn")
-        # for i in range(4, 0, -1):
-            # if self.eggs % i == 0:
-            #     for j in range(i):
-            #         count = 0
-            #         for egg in self.egg_list:
-            #             if count <= i:
-            #                 if not egg.did_click:
-            #                     egg.did_click = True
-            #                     egg.egg_motion_right()
-            #                     count += 1
-            #                     print(self.eggs)
-            #
-            #     break
         comps_num = 0
-        comps_go=self.eggs
+        comps_go = self.eggs
         if (comps_go -4) % 5 == 0:
             comps_go -= 4
             comps_num = 4
@@ -97,7 +84,7 @@ class Nim():
         if comps_go == 0:
             print("Computer wins")
             exit()
-        print (comps_go)
+        print(comps_go)
         for egg in self.egg_list:
             if comps_num == 0:
                 break
@@ -105,10 +92,7 @@ class Nim():
                 if not egg.did_click:
                     egg.did_click = True
                     egg.egg_motion_right()
-                    comps_num -=1
-               # print ("You win")
-
-
+                    comps_num -= 1
 
     def create_eggs(self):
         for i in range(self.eggs):
@@ -132,6 +116,7 @@ class Nim():
         self.wn.bgcolor("red")              # Set the background color
         bucket = turtle.Turtle()            # Create our favorite turtle
 
+      # Turtle draws the bucket that the eggs go in for the game
         bucket.hideturtle()
         bucket.pensize(5)
         bucket.penup()
@@ -159,17 +144,6 @@ class Egg:
         self.eggy.shape(self.image)
         self.eggy.onclick(self.egg_motion)
 
-    def egg_feature(self):
-        """ This method here will create a new nim game
-
-    :param new nim: the integer to be tested
-    :return: none """
-
-    # wn = turtle.Screen()
-    # wn.addshape("new_egg.gif")
-    # eggy = ("new_egg.gif")
-    # eggy2 =("new_egg.gif", 60, 200)
-
     def egg_motion(self,x, y):
         """ This method will move the player's eggs to the left
 
@@ -189,24 +163,7 @@ class Egg:
             self.eggy.forward(280)
             self.eggy.left(90)
             self.eggy.forward(450)
-            # a_t = input('Are you done?')
-            # if number_of_clicks >= 4:
-            #     # self.nim.end_turn_turt.onclick("button_end.gif")
-            #     # print(a_t)
-            #     self.nim.computers_turn()
-            # elif number_of_clicks >= 3:
-            #     # self.nim.end_turn.onclick("button_end.gif")
-            #     self.nim.computers_turn()
-            # elif number_of_clicks >= 2:
-            #     # self.nim.end_turn.onclick("button_end.gif")
-            #     self.nim.computers_turn()
-            # elif number_of_clicks >= 1:
-            #     # self.nim.end_turn.onclick("button_end.gif")
-            #     # print(a_t)
-            #     # if a_t == 'yes':
-            #     self.nim.computers_turn()
-            #     # else:
-            #     #     self.egg_motion(x, y)
+
     def egg_motion_right(self):
         """ This method will move the computer's eggs to the right
 
@@ -226,16 +183,6 @@ class Egg:
 def main():
 
     n = Nim()
-
-   # winner = create_eggs()
-    #while winner > 0:
-     #   winner = ask_user_for_eggs(winner)
-      #  print(winner)
-       # winner = computers_turn(winner)
-        #print(winner)
-
-        #n.players_turns()
-
 
 if __name__ == "__main__":
     main()
